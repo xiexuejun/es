@@ -17,6 +17,7 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -83,9 +84,9 @@ public class SearchableMethodArgumentResolver extends BaseMethodArgumentResolver
 
         String searchPrefix = getSearchPrefix(parameter);
 
-        Map<String, String[]> searcheableMap = getPrefixParameterMap(searchPrefix, webRequest, true);
+        Map<String, String[]> searchableMap = getPrefixParameterMap(searchPrefix, webRequest, true);
 
-        boolean hasCustomSearchFilter = searcheableMap.size() > 0;
+        boolean hasCustomSearchFilter = searchableMap.size() > 0;
 
         SearchableDefaults searchDefaults = getSearchableDefaults(parameter);
 
@@ -100,8 +101,8 @@ public class SearchableMethodArgumentResolver extends BaseMethodArgumentResolver
             if (searchable == null) {
                 searchable = Searchable.newSearchable();
             }
-            for (String name : searcheableMap.keySet()) {
-                String[] mapValues = filterSearchValues(searcheableMap.get(name));
+            for (String name : searchableMap.keySet()) {
+                String[] mapValues = filterSearchValues(searchableMap.get(name));
 
                 if (mapValues.length == 1) {
                     if (name.endsWith("in")) {
@@ -193,6 +194,12 @@ public class SearchableMethodArgumentResolver extends BaseMethodArgumentResolver
         }
 
         return searchable;
+    }
+
+    public static void main(String[] args) {
+        String paramValue = "aa,bb,cc;dd ee";
+        String[] s =  StringUtils.split(paramValue, ",; ");
+        System.out.println(Arrays.toString(s));
     }
 
 }

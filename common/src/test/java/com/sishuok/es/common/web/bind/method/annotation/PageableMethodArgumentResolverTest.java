@@ -35,7 +35,7 @@ public class PageableMethodArgumentResolverTest {
     @Before
     public void setUp() throws NoSuchMethodException {
         pageable = Controller.class.getDeclaredMethod("pageable", new Class[]{Pageable.class});
-        pageableAndSort = Controller.class.getDeclaredMethod("pageable", new Class[]{Pageable.class});
+        pageableAndSort = Controller.class.getDeclaredMethod("pageableAndSort", new Class[]{Pageable.class});
         methodDefaultPageable = Controller.class.getDeclaredMethod("methodDefaultPageable", new Class[]{Pageable.class});
         parameterDefaultPageable = Controller.class.getDeclaredMethod("parameterDefaultPageable", new Class[]{Pageable.class});
         customNamePrefixPageableAndSort = Controller.class.getDeclaredMethod("customNamePrefixPageableAndSort",
