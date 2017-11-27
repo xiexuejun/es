@@ -36,7 +36,7 @@ public @interface PageableDefaults {
     int value() default 10;
 
     /**
-     * The default-pagenumber the injected {@link org.synyx.hades.domain.Pageable} should get if no corresponding
+     * The default-pageNumber the injected {@link org.springframework.data.domain.Pageable} should get if no corresponding
      * parameter defined in request (default is 0).
      */
     int pageNumber() default 0;

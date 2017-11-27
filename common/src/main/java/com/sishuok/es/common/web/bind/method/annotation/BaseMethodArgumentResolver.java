@@ -24,7 +24,7 @@ public abstract class BaseMethodArgumentResolver implements HandlerMethodArgumen
 
 
     /**
-     * 获取指定前缀的参数：包括uri varaibles 和 parameters
+     * 获取指定前缀的参数：包括uri variables 和 parameters
      *
      * @param namePrefix
      * @param request

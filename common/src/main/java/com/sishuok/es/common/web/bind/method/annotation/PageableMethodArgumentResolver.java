@@ -56,7 +56,7 @@ import java.util.*;
  *
  *   排序默认按照请求时顺序排
  *   3.2、控制器处理方法写法
- *     public void test(@Qualifier("test") Pageable page1, @Qualifier("test") Pageable page2);
+ *     public void test(@Qualifier("test") Pageable page1, @Qualifier("foo") Pageable page2);
  * </pre>
  * <p/>
  * <pre>
@@ -74,7 +74,7 @@ public class PageableMethodArgumentResolver extends BaseMethodArgumentResolver {
     private static final String DEFAULT_PAGE_PREFIX = "page";
     private static final String DEFAULT_SORT_PREFIX = "sort";
 
-    private Pageable fallbackPagable = DEFAULT_PAGE_REQUEST;
+    private Pageable fallbackPageable = DEFAULT_PAGE_REQUEST;
     private String pagePrefix = DEFAULT_PAGE_PREFIX;
     private String sortPrefix = DEFAULT_SORT_PREFIX;
 
@@ -102,12 +102,12 @@ public class PageableMethodArgumentResolver extends BaseMethodArgumentResolver {
 
     /**
      * Setter to configure a fallback instance of {@link Pageable} that is being used to back missing parameters. Defaults
-     * to {@value #DEFAULT_PAGE_REQUEST}.
+     * to {@link #DEFAULT_PAGE_REQUEST}.
      *
-     * @param fallbackPagable the fallbackPagable to set
+     * @param fallbackPageable the fallbackPageable to set
      */
-    public void setFallbackPagable(Pageable fallbackPagable) {
-        this.fallbackPagable = null == fallbackPagable ? DEFAULT_PAGE_REQUEST : fallbackPagable;
+    public void setFallbackPageable(Pageable fallbackPageable) {
+        this.fallbackPageable = null == fallbackPageable ? DEFAULT_PAGE_REQUEST : fallbackPageable;
     }
 
     /**
@@ -287,7 +287,7 @@ public class PageableMethodArgumentResolver extends BaseMethodArgumentResolver {
             return defaultPageable;
         }
 
-        return fallbackPagable;
+        return fallbackPageable;
     }
 
     private PageableDefaults getPageableDefaults(MethodParameter parameter) {

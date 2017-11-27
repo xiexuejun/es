@@ -40,7 +40,7 @@
 
     <repositories>
 
-        <repository>
+        <!--<repository>
             <id>oschina Releases</id>
             <name>oschina Releases</name>
             <url>http://maven.oschina.net/content/groups/public</url>
@@ -92,7 +92,7 @@
             <id>sourceforge-releases</id>
             <name>Sourceforge Releases</name>
             <url>https://oss.sonatype.org/content/repositories/sourceforge-releases</url>
-        </repository>
+        </repository>-->
 
     </repositories>
     <pluginRepositories>
