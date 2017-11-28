@@ -138,10 +138,13 @@ public class PageableMethodArgumentResolver extends BaseMethodArgumentResolver {
 
         String pageableNamePrefix = getPagePrefix(parameter);
         String sortNamePrefix = getSortPrefix(parameter);
+
+        //如果有前端传过来的请求参数，以请求参数为主
         Map<String, String[]> pageableMap = getPrefixParameterMap(pageableNamePrefix, webRequest, true);
         Map<String, String[]> sortMap = getPrefixParameterMap(sortNamePrefix, webRequest, false);
 
         Sort sort = getSort(sortNamePrefix, sortMap, defaultPageRequest, webRequest);
+        //前端请求参数为空的情况下，才会用到defaultPageRequest
         if (pageableMap.size() == 0) {
             return new PageRequest(defaultPageRequest.getPageNumber(), defaultPageRequest.getPageSize(), sort == null ? defaultPageRequest.getSort() : sort);
         }
@@ -261,7 +264,7 @@ public class PageableMethodArgumentResolver extends BaseMethodArgumentResolver {
         Qualifier qualifier = parameter.getParameterAnnotation(Qualifier.class);
 
         if (qualifier != null) {
-            return new StringBuilder(((Qualifier) qualifier).value()).append("_").append(pagePrefix).toString();
+            return new StringBuilder((qualifier).value()).append("_").append(pagePrefix).toString();
         }
 
         return pagePrefix;

@@ -93,10 +93,11 @@ public class SearchableMethodArgumentResolver extends BaseMethodArgumentResolver
         boolean needMergeDefault = searchDefaults != null && searchDefaults.merge();
 
         Searchable searchable = null;
-        //自定义覆盖默认
+        //如果需要merge 或者 没有自定义请求参数传过来
         if (needMergeDefault || !hasCustomSearchFilter) {
             searchable = getDefaultFromAnnotation(searchDefaults);
         }
+        //如果有前端的自定义请求参数传过来，则添加自定义参数，有同名的参数覆盖默认参数
         if (hasCustomSearchFilter) {
             if (searchable == null) {
                 searchable = Searchable.newSearchable();
@@ -117,11 +118,11 @@ public class SearchableMethodArgumentResolver extends BaseMethodArgumentResolver
         }
 
         Pageable pageable = (Pageable) pageableMethodArgumentResolver.resolveArgument(parameter, mavContainer, webRequest, binderFactory);
-        //默认分页及排序
+        //默认分页及排序，needPage() default true; needSort() default true;
         if (searchDefaults == null) {
             searchable.setPage(pageable);
         }
-        //needPage=true 分页及排序
+        //needPage=true 分页及排序 ————分页必然包含排序？？
         if (searchDefaults != null && searchDefaults.needPage()) {
             searchable.setPage(pageable);
         }
@@ -129,13 +130,13 @@ public class SearchableMethodArgumentResolver extends BaseMethodArgumentResolver
         if (searchDefaults != null && !searchDefaults.needPage() && searchDefaults.needSort()) {
             searchable.addSort(pageable.getSort());
         }
-
         return searchable;
     }
 
     private String[] filterSearchValues(String[] values) {
         List<String> result = Lists.newArrayList(CollectionUtils.arrayToList(values));
         for (int i = 0; i < result.size(); i++) {
+            //只是把空白参数去掉
             if (StringUtils.isBlank(result.get(i))) {
                 result.remove(i);
             }

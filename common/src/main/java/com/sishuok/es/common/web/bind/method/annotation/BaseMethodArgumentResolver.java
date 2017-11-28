@@ -43,7 +43,7 @@ public abstract class BaseMethodArgumentResolver implements HandlerMethodArgumen
                 //page.pn  则截取 pn
                 if (subPrefix) {
                     char ch = name.charAt(namePrefix.length());
-                    //如果下一个字符不是 数字 . _  则不可能是查询 只是前缀类似
+                    //如果下一个字符不是 数字 . _  则不可能是查询 只是前缀类似  //下一个字符是‘_’ 是什么情况？
                     if (illegalChar(ch)) {
                         continue;
                     }
