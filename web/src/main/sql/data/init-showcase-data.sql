@@ -1,5 +1,5 @@
 #如果复制到mysql中执行时 加上
-#DELIMITER ;;
+DELIMITER ;;
 
 delete from `showcase_tree` where id >=1 and id<=11;;
 insert into `showcase_tree`(`id`, `parent_id`, `parent_ids`, weight, `name`, `is_show`) values (1, 0, '0/', 1, '根', true);;

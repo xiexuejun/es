@@ -1,5 +1,5 @@
 #如果复制到mysql中执行时 加上
-#DELIMITER ;;
+DELIMITER ;;
 
 delete from `maintain_notification_template` where id>=1 and id<=2000;;
 insert into `maintain_notification_template` (`id`, `name`, `system`, `title`, `template`, `deleted`)

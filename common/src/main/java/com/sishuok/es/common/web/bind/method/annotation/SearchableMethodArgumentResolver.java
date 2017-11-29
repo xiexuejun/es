@@ -41,7 +41,8 @@ import java.util.Map;
  *        public void test(@Qualifier("foo") Searchable searchable1, @Qualifier("test") Searchable searchable2);
  *
  *     3.1、禁用查询时分页及排序
- *          public void test(@Search(page = false, sort = false) Searchable searchable);
+ *          public void test(@Search(page = false, sort = false) Searchable searchable);//？？？？
+ *          public void test(@SearchableDefaults(needPage = false, needSort = false) Searchable searchable);
  * </pre>
  * <p>User: Zhang Kaitao
  * <p>Date: 13-1-22 下午8:48

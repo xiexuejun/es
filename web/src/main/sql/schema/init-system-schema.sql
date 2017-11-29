@@ -1,5 +1,5 @@
 #如果复制到mysql中执行时 加上
-#DELIMITER ;;
+DELIMITER ;;
 
 drop table if exists `sys_user`;;
 drop table if exists `sys_user_status_history`;;
@@ -24,7 +24,7 @@ create table `sys_user`(
   `mobile_phone_number`  varchar(20),
   `password`  varchar(100),
   `salt`       varchar(10),
-  `create_date` timestamp default 0,
+  `create_date` timestamp default CURRENT_TIMESTAMP,
   `status`    varchar(50),
   `deleted`   bool,
   `admin`     bool,
@@ -42,7 +42,7 @@ create table `sys_user_status_history`(
   `status`    varchar(50),
   `reason`     varchar(200),
   `op_user_id`  bigint,
-  `op_date`    timestamp default 0 ,
+  `op_date`    timestamp default CURRENT_TIMESTAMP ,
   constraint `pk_sys_user_block_history` primary key(`id`),
   index `idx_sys_user_block_history_user_id_block_date` (`user_id`,`op_date`),
   index `idx_sys_user_block_history_op_user_id_op_date` (`op_user_id`, `op_date`)
@@ -57,8 +57,8 @@ create table `sys_user_online`(
   `system_host`  varchar(100),
   `user_agent` varchar(200),
   `status`  varchar(50),
-  `start_timestsamp`    timestamp default 0 ,
-  `last_access_time`    timestamp default 0 ,
+  `start_timestsamp`    timestamp default CURRENT_TIMESTAMP ,
+  `last_access_time`    timestamp default CURRENT_TIMESTAMP ,
   `timeout`    bigint ,
   `session` mediumtext,
   constraint `pk_sys_user_online` primary key(`id`),
@@ -80,8 +80,8 @@ create table `sys_user_last_online`(
   `host`    varchar(100),
   `user_agent` varchar(200),
   `system_host`  varchar(100),
-  `last_login_timestamp`    timestamp default 0 ,
-  `last_stop_timestamp`    timestamp default 0 ,
+  `last_login_timestamp`    timestamp default CURRENT_TIMESTAMP ,
+  `last_stop_timestamp`    timestamp default CURRENT_TIMESTAMP ,
   `login_count`    bigint ,
   `total_online_time` bigint,
   constraint `pk_sys_user_last_online` primary key(`id`),

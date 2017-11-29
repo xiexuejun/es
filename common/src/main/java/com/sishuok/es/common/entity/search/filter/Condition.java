@@ -32,30 +32,30 @@ public final class Condition implements SearchFilter {
     /**
      * 根据查询key和值生成Condition
      *
-     * @param key   如 name_like
-     * @param value
+     * @param key   如：name_like
+     * @param value 如：Tom
      * @return
      */
     static Condition newCondition(final String key, final Object value) throws SearchException {
 
         Assert.notNull(key, "Condition key must not null");
 
-        String[] searchs = StringUtils.split(key, separator);
+        String[] searches = StringUtils.split(key, separator);
 
-        if (searchs.length == 0) {
+        if (searches.length == 0) {
             throw new SearchException("Condition key format must be : property or property_op");
         }
 
-        String searchProperty = searchs[0];
+        String searchProperty = searches[0];
 
         SearchOperator operator = null;
-        if (searchs.length == 1) {
+        if (searches.length == 1) {
             operator = SearchOperator.custom;
         } else {
             try {
-                operator = SearchOperator.valueOf(searchs[1]);
+                operator = SearchOperator.valueOf(searches[1]);
             } catch (IllegalArgumentException e) {
-                throw new InvlidSearchOperatorException(searchProperty, searchs[1]);
+                throw new InvlidSearchOperatorException(searchProperty, searches[1]);
             }
         }
 
@@ -64,6 +64,7 @@ public final class Condition implements SearchFilter {
         isValueBlank = isValueBlank || (value instanceof String && StringUtils.isBlank((String) value));
         isValueBlank = isValueBlank || (value instanceof List && ((List) value).size() == 0);
         //过滤掉空值，即不参与查询
+        //如果前端传过来参数名和空值，可以在此过滤掉
         if (!allowBlankValue && isValueBlank) {
             return null;
         }
@@ -112,7 +113,7 @@ public final class Condition implements SearchFilter {
      *
      * @return
      */
-    public SearchOperator getOperator() throws InvlidSearchOperatorException {
+    public SearchOperator getOperator() {
         return operator;
     }
 
@@ -159,6 +160,7 @@ public final class Condition implements SearchFilter {
 
     /**
      * 是否是一元过滤 如is null is not null
+     * 与 isAllowBlankValue 方法是一个意思？
      *
      * @return
      */

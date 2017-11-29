@@ -43,7 +43,8 @@ public enum SearchOperator {
     }
 
     /**
-     * 操作符是否允许为空
+     * Value是否允许为空
+     * 例如：select * from t_user where last_ip is null;
      *
      * @param operator
      * @return
@@ -52,8 +53,13 @@ public enum SearchOperator {
         return operator == SearchOperator.isNotNull || operator == SearchOperator.isNull;
     }
 
-
-    public static SearchOperator valueBySymbol(String symbol) throws SearchException {
+    /**
+     * 这个方法做什么用的？
+     * @param symbol
+     * @return
+     * @throws SearchException
+     */
+    public static SearchOperator getSearchOperatorBySymbol(String symbol) throws SearchException {
         symbol = formatSymbol(symbol);
         for (SearchOperator operator : values()) {
             if (operator.getSymbol().equals(symbol)) {
@@ -69,5 +75,12 @@ public enum SearchOperator {
             return symbol;
         }
         return symbol.trim().toLowerCase().replace("  ", " ");
+    }
+
+    public static void main(String[] args) {
+        SearchOperator so = SearchOperator.getSearchOperatorBySymbol("  <   ");
+        System.out.println(so);
+        System.out.println(SearchOperator.valueOf("eq"));
+
     }
 }
