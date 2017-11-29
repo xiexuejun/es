@@ -1,5 +1,5 @@
 #如果复制到mysql中执行时 加上
-#DELIMITER ;;
+DELIMITER ;;
 
 drop table if exists `personal_message`;;
 drop table if exists `personal_message_content`;;
@@ -10,12 +10,12 @@ create table `personal_message`(
   `id`               bigint not null auto_increment,
   `sender_id`        bigint,
   `receiver_id`      bigint,
-  `send_date`        timestamp default 0,
+  `send_date`        timestamp default CURRENT_TIMESTAMP,
   `title`            varchar(200),
   `sender_state`     varchar(20),
-  `sender_state_change_date`    timestamp  default 0,
+  `sender_state_change_date`    timestamp default CURRENT_TIMESTAMP,
   `receiver_state`   varchar(20),
-  `receiver_state_change_date`    timestamp  default 0,
+  `receiver_state_change_date`    timestamp default CURRENT_TIMESTAMP,
   `type`            varchar(20) ,
   `is_read`            bool ,
   `is_replied`          bool ,

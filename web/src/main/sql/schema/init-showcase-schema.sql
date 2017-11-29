@@ -1,5 +1,5 @@
 #如果复制到mysql中执行时 加上
-#DELIMITER ;;
+DELIMITER ;;
 
 drop table if exists `showcase_sample`;;
 drop table if exists `showcase_moveable`;;
@@ -18,7 +18,7 @@ create table `showcase_sample`(
     `id`         bigint not null auto_increment,
     `name`      varchar(100),
     `age`        smallint,
-    `birthday`   timestamp default 0,
+    `birthday`   timestamp default CURRENT_TIMESTAMP,
     `sex`        varchar(50),
     `is_show`       bool default false,
      `deleted`  bool default false,
@@ -62,8 +62,8 @@ create table `showcase_parent`(
   `id`          bigint not null auto_increment,
   `name`        varchar(100),
   `type`        varchar(50),
-  `beginDate`  timestamp default 0,
-  `endDate`    timestamp default 0,
+  `beginDate`  timestamp default CURRENT_TIMESTAMP,
+  `endDate`    timestamp default CURRENT_TIMESTAMP,
   `is_show`        bool,
   constraint `pk_showcase_parent` primary key(`id`)
 ) charset=utf8 ENGINE=InnoDB;;
@@ -93,8 +93,8 @@ create table `showcase_product`(
   `name`          varchar(100),
   `price`         bigint default 0,
   `number`        bigint default 0,
-  `beginDate`    timestamp default 0 ,
-  `endDate`      timestamp default 0 ,
+  `beginDate`    timestamp default CURRENT_TIMESTAMP ,
+  `endDate`      timestamp default CURRENT_TIMESTAMP ,
   `is_show`        bool,
   constraint `pk_showcase_product` primary key(`id`)
 ) charset=utf8 ENGINE=InnoDB;;

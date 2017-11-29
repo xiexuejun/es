@@ -143,12 +143,13 @@ public class PageableMethodArgumentResolver extends BaseMethodArgumentResolver {
 
         Sort sort = getSort(sortNamePrefix, sortMap, defaultPageRequest, webRequest);
         if (pageableMap.size() == 0) {
+            //defaultPageRequest.getPageNumber() 这里的pageNumber 并没有减1
             return new PageRequest(defaultPageRequest.getPageNumber(), defaultPageRequest.getPageSize(), sort == null ? defaultPageRequest.getSort() : sort);
         }
 
         int pn = getPn(pageableMap, defaultPageRequest);
         int pageSize = getPageSize(pageableMap, defaultPageRequest);
-
+        //这里的pageNumber 减1 与上面的情况不一致，是一个隐藏的bug
         return new PageRequest(pn - 1, pageSize, sort);
 
     }

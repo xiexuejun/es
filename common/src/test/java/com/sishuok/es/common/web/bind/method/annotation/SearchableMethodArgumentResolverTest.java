@@ -93,7 +93,7 @@ public class SearchableMethodArgumentResolverTest {
         NativeWebRequest webRequest = new ServletWebRequest(request);
         Searchable searchable = (Searchable) new SearchableMethodArgumentResolver().resolveArgument(parameter, null, webRequest, null);
 
-        //内部会自动-1，从0开始
+        //内部会自动-1，从0开始  ————（其实并没有减1）
         assertEquals(0, searchable.getPage().getPageNumber());
         assertEquals(10, searchable.getPage().getPageSize());
         assertEquals(null, searchable.getPage().getSort());
@@ -230,6 +230,9 @@ public class SearchableMethodArgumentResolverTest {
         request.setParameter("search.baseInfo.realname_like", "zhang");
         request.setParameter("search.username_eq", "zhang");
 
+       // @SearchableDefaults(value = {"baseInfo.realname_like=zhang", "id_eq=1"}, needPage = true)
+       // @PageableDefaults(value = DEFAULT_PAGESIZE, pageNumber = DEFAULT_PAGENUMBER, sort = {"id=desc", "name=asc"})
+
 
         MethodParameter parameter = new MethodParameter(parameterDefaultSearchable, 0);
         NativeWebRequest webRequest = new ServletWebRequest(request);
@@ -280,6 +283,9 @@ public class SearchableMethodArgumentResolverTest {
 
     @Test
     public void testMergeDefaultSearchableWithSearchParams() throws Exception {
+
+       // @SearchableDefaults(value = {"baseInfo.realname_like=zhang"}, merge = true, needPage = true)
+        // @PageableDefaults(value = DEFAULT_PAGESIZE, pageNumber = DEFAULT_PAGENUMBER, sort = {"id=desc", "name=asc"})
 
         request.setParameter("search.username_eq", "zhang");
 

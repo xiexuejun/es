@@ -663,7 +663,7 @@
             <artifactId>jcaptcha</artifactId>
             <version>${jcaptcha.version}</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.octo.captcha</groupId>
             <artifactId>jcaptcha-integration-simple-servlet</artifactId>
             <version>${jcaptcha.version}</version>
@@ -673,7 +673,7 @@
                     <groupId>javax.servlet</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency>-->
 
         <!-- html处理jar包 -->
         <dependency>

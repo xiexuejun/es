@@ -1,5 +1,5 @@
 #如果复制到mysql中执行时 加上
-#DELIMITER ;;
+DELIMITER ;;
 
 drop table if exists `maintain_icon`;;
 drop table if exists `maintain_map`;;
@@ -54,7 +54,7 @@ create table `maintain_notification_data`(
   `system`           varchar(50),
   `title`          varchar(600),
   `content`          varchar(2000),
-  `date`  timestamp default 0,
+  `date`  timestamp default CURRENT_TIMESTAMP,
   `is_read`            bool,
 
   constraint `pk_maintain_notification_data` primary key(`id`),
